@@ -1,5 +1,6 @@
 """
-Veille marches-publics.info — Notifications Discord
+Veille AWS — Notifications Discord
+By N0tad
 """
 
 import requests, threading, json, os, sys, time, gc, schedule
@@ -7,13 +8,15 @@ from playwright.sync_api import sync_playwright
 
 # ─── CONFIG ───────────────────────────────────────────────────────────────────
 
-KEYWORDS        = ["isolation", "doublage", "plafond", "cloison", "menuiserie"]
+KEYWORDS        = ["isolation", "doublage", "plafond", "cloison", "menuiserie"] # A personnaliser
 BASE_URL        = "https://www.marches-publics.info"
-DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1496164951130247238/FrveuqxH9xNzz5Qs-GLfZUi5qaEsofJ7J73RblTnFxVWr0sNeQ5D_t8txv1ndXEQ16Aw"
+DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1496164951130247238/FrveuqxH9xNzz5Qs-GLfZUi5qaEsofJ7J73RblTnFxVWr0sNeQ5D_t8txv1ndXEQ16Aw" # A personnaliser
 
 DIR          = os.path.dirname(os.path.abspath(__file__))
 FICHIER_VUS  = os.path.join(DIR, "aws_vus.json")
 FICHIER_LOG  = os.path.join(DIR, "aws_veille.log")
+
+# HEADER HTTP
 
 HEADERS = {
     "User-Agent":      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
@@ -89,9 +92,9 @@ def fetch(kw: str, results: dict):
             s.headers["Referer"] = f"{BASE_URL}/Annonces/rechercher"
             r = s.post(f"{BASE_URL}/Annonces/lister", timeout=15, data=(
                 f"IDE=EC&IDN=T&IDP=X&annee=X&Rechercher=Rechercher"
-                f"&IDR=35%2C37%2C44%2C49%2C53%2C56%2C72%2C79%2C85"
-                f"&txtLibre={kw}&dateParution=+%3D+0"
-                f"&listeCPV=&txtLibreLieuExec=&dateNotifDebut=&dateNotifFin="
+                f"&IDR=35%2C37%2C44%2C49%2C53%2C56%2C72%2C79%2C85" # A personnaliser
+                f"&txtLibre={kw}&dateParution=+%3D+0" # A personnaliser
+                f"&listeCPV=&txtLibreLieuExec=&dateNotifDebut=&dateNotifFin=" # A personnaliser
                 f"&txtAcheteurNom=&txtAcheteurSiret=&txtTitulaireNom=&txtTitulaireSiret="
                 f"&txtLibreAcheteur=&txtLibreVille=&txtLibreRef=&txtLibreObjet=&dateExpiration="
             ))
@@ -167,7 +170,7 @@ def scraper():
 # ─── LANCEMENT ────────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
-    print("🚀 Veille marches-publics.info démarrée — toutes les 30 minutes")
+    print("Veille marches-publics.info démarrée — toutes les 30 minutes")
     print(f"   Webhook : {DISCORD_WEBHOOK[:50]}...")
     print(f"   Logs    : {FICHIER_LOG}")
     print()
