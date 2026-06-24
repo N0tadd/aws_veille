@@ -10,7 +10,7 @@ from playwright.sync_api import sync_playwright
 
 KEYWORDS        = ["isolation", "doublage", "plafond", "cloison", "menuiserie"] # A personnaliser
 BASE_URL        = "https://www.marches-publics.info"
-DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1496164951130247238/FrveuqxH9xNzz5Qs-GLfZUi5qaEsofJ7J73RblTnFxVWr0sNeQ5D_t8txv1ndXEQ16Aw" # A personnaliser
+DISCORD_WEBHOOK = "" # A personnaliser
 
 DIR          = os.path.dirname(os.path.abspath(__file__))
 FICHIER_VUS  = os.path.join(DIR, "aws_vus.json")
